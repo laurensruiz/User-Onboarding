@@ -55,7 +55,7 @@ const Form = (props) => {
                         onChange={onChange}
                     />
                 </label>
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Submit" id="submitBtn"/>
             </form>
         </div>
         
