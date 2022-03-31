@@ -85,16 +85,14 @@ describe("Form App", () => {
     
     describe("Can submit information", () => {
         it("Can submit information", () => {
-            usernameInput("sampleUser").should("not.exist")
+            //usernameInput("sampleUser").should("not.exist")
             usernameInput().type("sampleUser");
             emailInput().type("sampleemail@gmail.com");
             passwordInput().type("123456");
             tosInput().check({force: true})
             submitBtn().click();
-            usernameInput("sampleUser").next().next().next().next().click();
+            cy.get('POST', 'https://reqres.in/api/users', { username: 'sampleUser' })
             
-
-        
           })
         })
 
