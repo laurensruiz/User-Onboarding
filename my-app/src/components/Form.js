@@ -1,18 +1,18 @@
 import React from "react";
 
 const Form = (props) => {
-    const { change, submit, errors } = props;
-    const {username, email, password, tos} = props.values;
+    const { change, submit, errors } = props; // props we set
+    const {username, email, password, tos} = props.values; // this is values props we set since there will be many, this links to formValues, what is being typed 
 
-    const onChange =(evt) => {
-        const {name, value, checked, type} = evt.target
-        const newVal = type === 'checkbox' ? checked : value;
-        change(name, newVal);
+    const onChange = (evt) => {
+        const {name, value, checked, type} = evt.target //
+        const newVal = type === 'checkbox' ? checked : value; 
+        change(name, newVal); //onChange
     }
 
     const onSubmit = (evt) =>{
         evt.preventDefault();
-        submit();
+        submit(); //onSubmit
     }
 
     return (
@@ -27,7 +27,7 @@ const Form = (props) => {
                     <input
                         type="text"
                         name="username"
-                        value={username}
+                        value={username.trim()}
                         onChange={onChange}
                     />
                 </label>
@@ -35,7 +35,7 @@ const Form = (props) => {
                     <input
                         type="email"
                         name="email"
-                        value={email}
+                        value={email.trim()}
                         onChange={onChange}
                     />
                 </label>
