@@ -33,6 +33,9 @@ describe("Form App", () => {
         tosInput().should("exist");
         fooBarInput().should("not.exist");
         submitBtn().should("exist");
+
+        cy.contains("Submit").should("exist");
+        // Didn't work: cy.contains(/submit/i).should("exist"); // this is same as previous line except case doesn't matter
     })
 
     describe("Filling out the inputs and cancelling", () => {
@@ -59,15 +62,40 @@ describe("Form App", () => {
               .should("have.value", "123456");
         })
 
-    })
-
-    describe("TOS can be checked", () => {
-        it("can be checked", () => {
+        it("TOS can be checked", () => {
             tosInput()
             .should('be.visible') 
             .check({ force: true }) // checks the box
             .should('be.checked')
             })
+        
+    })
+
+    describe("Check Response Data", () => {
+        it("Can Accept Data into API", () => {
+            cy.request('POST', 'https://reqres.in/api/users', { username: 'Jane' }).then(
+                (response) => {
+                  // response.body is automatically serialized into JSON
+                  expect(response.body).to.have.property('username', 'Jane') // true
+                }
+              ) 
+        })
+
+    })
+    
+    describe("Can submit information", () => {
+        it("Can submit information", () => {
+            usernameInput("sampleUser").should("not.exist")
+            usernameInput().type("sampleUser");
+            emailInput().type("sampleemail@gmail.com");
+            passwordInput().type("123456");
+            tosInput().check({force: true})
+            submitBtn().click();
+            usernameInput("sampleUser").next().next().next().next().click();
+            
+
+        
+          })
         })
 
 
